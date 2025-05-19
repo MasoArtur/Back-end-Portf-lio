@@ -7,6 +7,9 @@
 // app.use(cors());
 // app.use(express.json());
 
+const express = require('express');
+const router = express.Router();
+
 const bd_cards_formacao_curso = [
     {
         imagem: "fa-solid fa-image", titulo: "Cursos", sobretitulo: "tempo", paragrafo: "descrição do seu cursos",
@@ -31,11 +34,11 @@ const bd_cards_formacao_curso = [
     },
 ];
 
-app.get('/cursos', (req, res) =>{
+router.get('/cursos', (req, res) =>{
     res.json(bd_cards_formacao_curso);
 });
 
-app.post('/cursos', (req, res) =>{
+router.post('/cursos', (req, res) =>{
     try{
         bd_cards_formacao_curso.push(req.body);
         res.json({resposta: "deu boa"});
@@ -45,7 +48,7 @@ app.post('/cursos', (req, res) =>{
     }
 });
 
-app.put('/cursos', (req, res) =>{
+router.put('/cursos', (req, res) =>{
     try{
         const {titulo, preco, img} = req.body;
         const index = bd_cards_formacao_curso.findIndex(p => p.titulo === titulo); //Para cada item p do array, verifique se p.titulo (o titulo do item do array) é igual a nome (a variável vinda do corpo da requisição).
@@ -61,7 +64,7 @@ app.put('/cursos', (req, res) =>{
     }
 });
 
-app.delete('/cursos', (res, req) =>{
+router.delete('/cursos', (req, res) =>{
     try{
         const{titulo} = req.body; //extrai o valor titulo que foi enviado ao json.esse é o nome do item que voce quer deletar
         const index = bd_cards_formacao_curso.findIndex(p => p.titulo === titulo);
@@ -79,10 +82,4 @@ app.delete('/cursos', (res, req) =>{
     }
 });
 
-const Router = express.Router();
-Router.get();
-Router.post();
-Router.put();
-Router.delete();
-
-module.exports = Router;
+module.exports = router;

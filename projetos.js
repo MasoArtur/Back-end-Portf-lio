@@ -7,7 +7,10 @@
 
 // app.use(cors());
 // app.use(express.json());
- 
+
+const express = require('express');
+const router = express.Router();
+
 const bd_cards_projetos = [
     { titulo: "Smartphone Samsung Galaxy A15 128GB", preco: "1.299,00", img: "https:app.lojasnossolar.com.br/images/nossolar/produtos/17527/071911_242391_P1000.jpg"},
     { titulo: "Notebook Acer Aspire 5 Intel Core i5 8GB RAM", preco: "2.799,99" },
@@ -36,11 +39,11 @@ const bd_cards_projetos = [
     { titulo: "PlayStation 5 Edição Digital", preco: "3.999,00" }
 ];
 
-app.get('/projetos', (req, res) =>{
+router.get('/', (req, res) =>{
     res.json(bd_cards_projetos);
 });
 
-app.post('/projetos', (req, res) =>{
+router.post('/', (req, res) =>{
     try{
         bd_cards_projetos.push(req.body);
         res.json({resposta: "deu boa"});
@@ -50,7 +53,7 @@ app.post('/projetos', (req, res) =>{
     }
 });
 
-app.put('/projetos', (req, res) =>{
+router.put('/', (req, res) =>{
     try{
         const {titulo, preco, img} = req.body;
         const index = bd_cards_projetos.findIndex(p => p.titulo === titulo); //Para cada item p do array, verifique se p.titulo (o titulo do item do array) é igual a nome (a variável vinda do corpo da requisição).
@@ -66,7 +69,7 @@ app.put('/projetos', (req, res) =>{
     }
 });
 
-app.delete('/projetos', (res, req) =>{
+router.delete('/', (req, res) =>{
     try{
         const{titulo} = req.body; //extrai o valor titulo que foi enviado ao json.esse é o nome do item que voce quer deletar
         const index = bd_cards_projetos.findIndex(p => p.titulo === titulo);
@@ -84,10 +87,4 @@ app.delete('/projetos', (res, req) =>{
     }
 });
 
-const Router = express.Router();
-Router.get();
-Router.post();
-Router.put();
-Router.delete()
-
-module.exports = Router;
+module.exports = router;
