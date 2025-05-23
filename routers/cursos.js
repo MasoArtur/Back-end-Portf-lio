@@ -34,11 +34,11 @@ const bd_cards_formacao_curso = [
     },
 ];
 
-router.get('/cursos', (req, res) =>{
+router.get('', (req, res) =>{
     res.json(bd_cards_formacao_curso);
 });
 
-router.post('/cursos', (req, res) =>{
+router.post('', (req, res) =>{
     try{
         bd_cards_formacao_curso.push(req.body);
         res.json({resposta: "deu boa"});
@@ -48,7 +48,7 @@ router.post('/cursos', (req, res) =>{
     }
 });
 
-router.put('/cursos', (req, res) =>{
+router.put('', (req, res) =>{
     try{
         const {titulo, preco, img} = req.body;
         const index = bd_cards_formacao_curso.findIndex(p => p.titulo === titulo); //Para cada item p do array, verifique se p.titulo (o titulo do item do array) é igual a nome (a variável vinda do corpo da requisição).
@@ -64,7 +64,7 @@ router.put('/cursos', (req, res) =>{
     }
 });
 
-router.delete('/cursos', (req, res) =>{
+router.delete('', (req, res) =>{
     try{
         const{titulo} = req.body; //extrai o valor titulo que foi enviado ao json.esse é o nome do item que voce quer deletar
         const index = bd_cards_formacao_curso.findIndex(p => p.titulo === titulo);
